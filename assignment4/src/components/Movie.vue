@@ -2,6 +2,7 @@
 import { ref } from "vue";
 import axios from "axios";
 let information = ref(null);
+let key = "158d1cb56293f1fb163c660df9925f96";
 
 async function grabOption() {
   const id = movies.value;
