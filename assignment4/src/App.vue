@@ -3,7 +3,9 @@ import Movie from "./components/Movie.vue";
 </script>
 
 <template>
-  <Movie></Movie>
+  <Suspense>
+    <Movie />
+  </Suspense>
 </template>
 
 <style scoped></style>

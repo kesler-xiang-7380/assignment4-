@@ -7,55 +7,53 @@ let key = "158d1cb56293f1fb163c660df9925f96";
 async function grabOption() {
   const id = movies.value;
   console.log(id);
-  information.value = await axios.get(
-    `https://api.themoviedb.org/3/movie/${id}?api_key=${key}&append_to_response=videos`
-  );
-  let info = information.data;
-  console.log(info);
+  information.value = (
+    await axios.get(
+      `https://api.themoviedb.org/3/movie/${id}?api_key=${key}&append_to_response=videos`
+    )
+  ).data;
 }
 </script>
 
 <template>
   <body>
-    <div id="main" v-if="information">
-      <h1>Movies for movie night</h1>
-      <p>Based off of an objectively good opinon.</p>
-      <label for="movie">Choose a movie:</label>
-      <select id="movies">
-        <option value="635302">Demon Slayer: Mugen Train</option>
-        <option value="610150">Dragon Ball Super: Super Hero</option>
-        <option value="503314">Dragon Ball Super: Broly</option>
-        <option value="129">Spirited Away</option>
-        <option value="8392">My Neighbour Totoro</option>
-        <option value="900667">One Piece: Film Red</option>
-        <option value="315162">Puss in Boots: The Last Wish</option>
-        <option value="24428">The Avengers</option>
-        <option value="11836">The SpongeBob SquarePants Movie</option>
-        <option value="980078">Winnie the Pooh: Blood and Honey</option>
-      </select>
-      <button id="button" @click="grabOption()">Load</button>
-      <h1 id="title"></h1>
-      <h3 id="overview" class="clear"></h3>
-      <div id="grid" v-if="information">
-        <div id="storage">
-          <h4 id="overview">{{ information.overview }}</h4>
-          <h4 id="original-language"></h4>
-          <h4 id="budget">{{ information.budget }}</h4>
-          <h4 id="genre">{{ information.genre }}</h4>
-          <h4 id="vote-average">{{ information.vote_average }}</h4>
-          <h4 id="vote-count">{{ information.vote_count }}</h4>
-          <h4 id="release-date">{{ information.release_date }}</h4>
-          <h4 id="popularity">{{ information.popularity }}</h4>
-          <h4 id="summary">{{ information.summary }}</h4>
-          <h4 id="revenue">{{ information.revenue }}</h4>
-          <iframe
-            id="video"
-            :src="`https://www.youtube.com/embed/${trailer.at(0).key}`"
-            allowfullscreen
-          ></iframe>
-        </div>
-        <div><img id="poster" /><br /></div>
+    <h1>Movies for movie night</h1>
+    <p>Based off of an objectively good opinon.</p>
+    <label for="movie">Choose a movie:</label>
+    <select id="movies">
+      <option value="635302">Demon Slayer: Mugen Train</option>
+      <option value="610150">Dragon Ball Super: Super Hero</option>
+      <option value="503314">Dragon Ball Super: Broly</option>
+      <option value="129">Spirited Away</option>
+      <option value="8392">My Neighbour Totoro</option>
+      <option value="900667">One Piece: Film Red</option>
+      <option value="315162">Puss in Boots: The Last Wish</option>
+      <option value="24428">The Avengers</option>
+      <option value="11836">The SpongeBob SquarePants Movie</option>
+      <option value="980078">Winnie the Pooh: Blood and Honey</option>
+    </select>
+    <button id="button" @click="grabOption()">Load</button>
+    <h1 id="title"></h1>
+    <h3 id="overview" class="clear"></h3>
+    <div id="grid" v-if="information">
+      <div id="storage">
+        <h4 id="overview">{{ information.overview }}</h4>
+        <h4 id="original-language"></h4>
+        <h4 id="budget">{{ information.budget }}</h4>
+        <h4 id="genre">{{ information.genre }}</h4>
+        <h4 id="vote-average">{{ information.vote_average }}</h4>
+        <h4 id="vote-count">{{ information.vote_count }}</h4>
+        <h4 id="release-date">{{ information.release_date }}</h4>
+        <h4 id="popularity">{{ information.popularity }}</h4>
+        <h4 id="summary">{{ information.summary }}</h4>
+        <h4 id="revenue">{{ information.revenue }}</h4>
+        <!-- <iframe
+          id="video"
+          :src="`https://www.youtube.com/embed/${trailer.at(0).key}`"
+          allowfullscreen
+        ></iframe> -->
       </div>
+      <div><img id="poster" /><br /></div>
     </div>
   </body>
 </template>
