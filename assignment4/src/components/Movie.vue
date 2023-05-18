@@ -39,14 +39,14 @@ async function grabOption() {
       <div id="storage">
         <h4 id="overview">{{ information.overview }}</h4>
         <h4 id="original-language"></h4>
-        <h4 id="budget">{{ information.budget }}</h4>
+        <h4 id="budget">Amount spent making this movie ($):{{ information.budget }}</h4>
         <h4 id="genre">{{ information.genre }}</h4>
         <h4 id="vote-average">{{ information.vote_average }}</h4>
         <h4 id="vote-count">{{ information.vote_count }}</h4>
-        <h4 id="release-date">{{ information.release_date }}</h4>
-        <h4 id="popularity">{{ information.popularity }}</h4>
+        <h4 id="release-date">Release date:{{ information.release_date }}</h4>
+        <h4 id="popularity">Popularity: {{ information.popularity }}</h4>
         <h4 id="summary">{{ information.summary }}</h4>
-        <h4 id="revenue">{{ information.revenue }}</h4>
+        <h4 id="revenue">Amount this movie earned: {{ information.revenue }}</h4>
         <!-- <iframe
           id="video"
           :src="`https://www.youtube.com/embed/${trailer.at(0).key}`"
@@ -66,7 +66,7 @@ body {
   background-repeat: no-repeat;
   background-size: cover;
   text-align: center;
-  color: rgb(229, 230, 170);
+  color: rgb(202, 102, 128);
   font-family: "limelight", "Space Mono", monospace;
   width: 100vh;
 }
