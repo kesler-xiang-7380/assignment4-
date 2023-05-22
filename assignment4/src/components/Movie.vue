@@ -1,17 +1,20 @@
 <script setup>
-import { ref } from "vue";
+import { getTransitionRawChildren, ref } from "vue";
 import axios from "axios";
 let information = ref(null);
+let trailer = ref(null);
 let key = "158d1cb56293f1fb163c660df9925f96";
 
 async function grabOption() {
   const id = movies.value;
-  console.log(id);
   information.value = (
     await axios.get(
       `https://api.themoviedb.org/3/movie/${id}?api_key=${key}&append_to_response=videos`
     )
   ).data;
+  trailer.value = information._rawValue.videos.results.filter((trailer) => {
+    return trailer.type === "Trailer";
+  });
 }
 </script>
 
@@ -19,7 +22,7 @@ async function grabOption() {
   <body>
     <h1>Movies for movie night</h1>
     <p>Based off of an objectively good opinon.</p>
-    <label for="movie">Choose a movie:</label>
+    <label for="movies">Choose a movie:</label>
     <select id="movies">
       <option value="635302">Demon Slayer: Mugen Train</option>
       <option value="610150">Dragon Ball Super: Super Hero</option>
@@ -41,19 +44,22 @@ async function grabOption() {
         <h4 id="original-language"></h4>
         <h4 id="budget">Amount spent making this movie ($):{{ information.budget }}</h4>
         <h4 id="genre">{{ information.genre }}</h4>
-        <h4 id="vote-average">{{ information.vote_average }}</h4>
-        <h4 id="vote-count">{{ information.vote_count }}</h4>
+        <h4 id="vote-average">Average votes: {{ information.vote_average }}</h4>
+        <h4 id="vote-count">Vote count: {{ information.vote_count }}</h4>
         <h4 id="release-date">Release date:{{ information.release_date }}</h4>
         <h4 id="popularity">Popularity: {{ information.popularity }}</h4>
         <h4 id="summary">{{ information.summary }}</h4>
-        <h4 id="revenue">Amount this movie earned: {{ information.revenue }}</h4>
-        <!-- <iframe
-          id="video"
-          :src="`https://www.youtube.com/embed/${trailer.at(0).key}`"
-          allowfullscreen
-        ></iframe> -->
+        <h4 id="revenue">Amount this movie earned ($): {{ information.revenue }}</h4>
+        <iframe id="videos"
+        :src="`https://www.youtube.com/embed/${trailer.at(0).key}`"
+        allowfullscreen
+        ></iframe>
+        <img
+        id="poster"
+        :src="`https://image.tmdb.org/t/p/original/${information.poster_path}`"
+        alt="Movie Poster"
+        />
       </div>
-      <div><img id="poster" /><br /></div>
     </div>
   </body>
 </template>
@@ -62,13 +68,14 @@ async function grabOption() {
 @import url("https://fonts.googleapis.com/css2?family=Limelight&display=swap");
 body {
   background-image: url(https://media.istockphoto.com/id/1182610296/photo/cinema-concept-popcorn-in-a-box-and-movie-clapper-on-wooden-background-top-view-free-space.jpg?b=1&s=170667a&w=0&k=20&c=GYcqo_4-B_Jn6cbmNP3uWgdGNclbwcwtV7KQHu1wzJY=);
-  background-attachment: fixed;
   background-repeat: no-repeat;
-  background-size: cover;
+  background-attachment: fixed;
+  background-size: 100%;
   text-align: center;
   color: rgb(202, 102, 128);
   font-family: "limelight", "Space Mono", monospace;
-  width: 100vh;
+  height: 130vh;
+  width: 100vw;
 }
 #poster {
   height: 50rem;
